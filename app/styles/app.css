@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  * {
+    text-rendering: optimizeLegibility;
+    scrollbar-width: thin;
+  }
+
+  html {
+    @apply scroll-smooth;
+    scrollbar-gutter: stable;
+    -webkit-tap-highlight-color: transparent;
+
+    .disable-transitions,
+    .disable-transitions * {
+      @apply !transition-none;
+    }
+  }
+  html,
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+    }
+  }
+  body {
+    text-rendering: optimizeLegibility;
+    overflow-y: scroll;
+  }
+}
