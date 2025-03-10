@@ -6,6 +6,15 @@ The template uses a [hono](https://hono.dev/) back-end thanks to [react-router-h
 
 A custom hono middleware for i18n adds server-side i18next object to the context of both hono and react-router so that route loaders and actions can access the request locale and the i18next instance for translations.
 
+## Status
+
+90% with all core functionality implemented.
+
+TODO:
+
+- [ ] Add a language switcher
+- [ ] Add a language switch by path prefix for any direct navigation by react-router `Link` or `useNavigate()` to a different locale
+
 ## i18n Routing Convention
 
 The default locale does not require a locale prefix in the pathname, e.g.:
