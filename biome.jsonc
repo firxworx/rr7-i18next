@@ -1,0 +1,148 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "organizeImports": {
+    "enabled": false
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "recommended": true,
+        // disable rule because arrow functions are in fact different vs. function syntax (e.g. they do not bind `this`)
+        // react components lose the component name with arrow functions but do not with function() syntax
+        "useArrowFunction": { "fix": "none", "level": "off" }
+      },
+      "correctness": {
+        // rule can be annoying during development (it can always be turned on in CI)
+        "noUnusedImports": "off"
+      },
+      "performance": {
+        "recommended": true
+      },
+      "security": {
+        "recommended": true
+      },
+      "style": {
+        "recommended": true,
+        "noDefaultExport": "off",
+        "noNonNullAssertion": { "level": "warn" },
+        "useImportType": { "level": "error" }
+      },
+      "suspicious": {
+        "recommended": true,
+        // warn because key={index} is ok in trivial cases where components are not reordered
+        "noArrayIndexKey": { "level": "warn" }
+      },
+      "a11y": {
+        "recommended": true,
+        // not helpful when majority of icons are aria-hidden
+        "noSvgWithoutTitle": {
+          "level": "off"
+        },
+        // false positives
+        "useSemanticElements": {
+          "level": "off"
+        }
+      },
+      "nursery": {
+        "recommended": true,
+        "noProcessEnv": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded",
+      "jsxQuoteStyle": "double"
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true,
+      "allowTrailingCommas": false
+    },
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "css": {
+    "parser": {
+      "allowWrongLineComments": false,
+      "cssModules": false
+    }
+  },
+  "overrides": [
+    // support component and props/value patterns that prefer indexed keys
+    {
+      "include": ["*.tsx"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "useLiteralKeys": "off"
+          }
+        }
+      }
+    },
+    // react-router v7 boilerplate uses `{}` pattern for empty route meta args
+    {
+      "include": ["app/*routes*/**/*.tsx"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noEmptyPattern": "off"
+          }
+        }
+      }
+    },
+    // loosen rules for tests to allow `any`
+    {
+      "include": ["test*/**", "**/*.test.ts", "**/*.test.tsx"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noForEach": "off"
+          },
+          "correctness": {
+            "noUnusedImports": "off"
+          },
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ],
+  "files": {
+    "ignore": [
+      // pnpm and npm format package.json differently than biome so ignore to avoid unnecessary changes in git
+      "package.json",
+
+      // vscode snippets
+      "./.vscode/*.code-snippets",
+
+      // other patterns (also see .gitignore when `vcs.useIgnoreFile` is `true`)
+      "**/node_modules",
+      "**/migrations",
+      "**/coverage",
+      "**/storybook-static"
+    ]
+  }
+}

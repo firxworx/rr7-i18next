@@ -1,0 +1,69 @@
+{
+  // use project version of typescript in vscode
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // ensure vscode uses pnpm vs. npm
+  "npm.packageManager": "pnpm",
+
+  // eslint and prettier switches
+  "eslint.enable": false,
+  "prettier.enable": false,
+  "biome.enabled": true,
+
+  // editor configuration
+  "editor.guides.bracketPairs": true,
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+
+  // ensure biome is the default formatter (vs. esbenp.prettier-vscode)
+  "editor.defaultFormatter": "biomejs.biome",
+
+  // ensure biome is enabled per language-specific settings
+  "[astro]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  // autocorrect lint/format issues on save with biome
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+
+  // ensure intellisense offers autocomplete for tailwind classes
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  // ensure these align with tailwind configuration for intellisense to compute correct values
+  "tailwindCSS.rootFontSize": 16,
+  "tailwindCSS.codeActions": true,
+
+  // exclude generated files and tmp/* from search
+  "files.exclude": {
+    "**/routeTree.gen.ts": true,
+    "pnpm-lock.yaml": true,
+    "**/node_modules/*": true,
+    "tmp/*": true
+  }
+}
