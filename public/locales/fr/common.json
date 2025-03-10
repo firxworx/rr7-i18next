@@ -1,0 +1,45 @@
+{
+  "helloWorld": "Bonjour le monde!",
+  "i18n": {
+    "selectLanguage": "Choisir la langue",
+    "selectLocale": "Choisir la localité",
+    "language": "Langue",
+    "locale": "Localité",
+    "timeZone": "Fuseau horaire",
+    "currency": "Devise"
+  },
+  "locales": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "nativeLocales": {
+    "en": "English",
+    "fr": "Français"
+  },
+  "action": {
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "goToHome": "Aller à la page d'accueil"
+  },
+  "menu": {
+    "toggleMenu": "Toggle Menu"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos"
+  },
+  "error": {
+    "error": "Erreur",
+    "badRequest": "Mauvaise demande",
+    "notFound": "Non trouvé",
+    "serverError": "Erreur du serveur",
+    "unknownError": "Erreur inconnue",
+    "unexpectedError": "Erreur inattendue",
+    "notFoundMessage": "La page que vous recherchez n'existe pas.",
+    "serverErrorMessage": "Une erreur s'est produite lors du traitement de votre demande.",
+    "stackTrace": "Trace de la pile"
+  }
+}

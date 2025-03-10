@@ -1,0 +1,45 @@
+{
+  "helloWorld": "Hello, World!",
+  "i18n": {
+    "selectLanguage": "Select Language",
+    "selectLocale": "Select Locale",
+    "language": "Language",
+    "locale": "Locale",
+    "timeZone": "Time Zone",
+    "currency": "Currency"
+  },
+  "locales": {
+    "en": "English",
+    "fr": "French"
+  },
+  "nativeLocales": {
+    "en": "English",
+    "fr": "Français"
+  },
+  "action": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "goToHome": "Go to Home"
+  },
+  "menu": {
+    "toggleMenu": "Toggle Menu"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About"
+  },
+  "error": {
+    "error": "Error",
+    "badRequest": "Bad Request",
+    "notFound": "Not Found",
+    "serverError": "Server Error",
+    "unknownError": "Unknown Error",
+    "unexpectedError": "Unexpected Error",
+    "notFoundMessage": "The page you are looking for does not exist.",
+    "serverErrorMessage": "An error occurred while processing your request.",
+    "stackTrace": "Stack Trace"
+  }
+}
