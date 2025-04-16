@@ -1,4 +1,5 @@
 import type { To } from 'react-router'
+
 import { ALTERNATE_LOCALES, DEFAULT_LOCALE, PREFIX_DEFAULT_LOCALE, SITE_URL, SUPPORTED_LOCALES } from '@/constants'
 import { IS_PRODUCTION } from '@/env.config'
 import { applySlashRule, ensureLeadingSlash } from '@/lib/slashes'
@@ -12,6 +13,8 @@ export type RightToLeftLanguageCode = (typeof RTL_LANGUAGES)[number]
  * Array of RTL (right-to-left) BCP-47 (ISO) standard 2-character language codes.
  *
  * Note the i18next package also exports a list of RTL languages.
+ *
+ * When using i18next: `const dir = i18n.dir(i18n.language)`
  */
 export const RTL_LANGUAGES = ['ar', 'fa', 'he', 'ur', 'yi', 'ps', 'sd', 'dv'] as const
 
@@ -34,20 +37,38 @@ export function getAlternateSupportedLocales(): string[] {
   return [...ALTERNATE_LOCALES] satisfies string[]
 }
 
+/**
+ * Returns `true` if input is strictly the `DEFAULT_LOCALE` (case-sensitive exact match).
+ *
+ * Serves as a type guard for `SupportedLocale` type.
+ */
 export function isDefaultLocale(input: unknown): input is SupportedLocale {
   return typeof input === 'string' && input === String(DEFAULT_LOCALE)
 }
 
+/**
+ * Returns `true` if the input is strictly a `SupportedLocale` and _not_ `DEFAULT_LOCALE` (case-sensitive exact match).
+ *
+ * Serves as a type guard for `SupportedLocale` type.
+ */
 export function isAlternateSupportedLocale(input: unknown): input is SupportedLocale {
   return typeof input === 'string' && getAlternateSupportedLocales().includes(input)
 }
 
+/**
+ * Returns `true` if the input is a strictly a `SupportedLocale` (case-sensitive exact match).
+ *
+ * Serves as a type guard for `SupportedLocale` type.
+ */
 export function isSupportedLocale(input: unknown): input is SupportedLocale {
   return typeof input === 'string' && getSupportedLocales().includes(input)
 }
 
 /**
  * Ensures an unknown input resolves to a `SupportedLocale` with fallback to `DEFAULT_LOCALE`.
+ * The input is checked using strict case-sensitive equality.
+ *
+ * Serves as a type guard for `SupportedLocale` type.
  */
 export function ensureLocale(input: unknown): SupportedLocale {
   return isSupportedLocale(input) ? input : DEFAULT_LOCALE
@@ -220,7 +241,7 @@ export function getLocalizedRouterTo(targetLocale: string | undefined, to: To): 
  * Return the input pathname including locale path prefix for the given locale.
  * Respects the `prefixDefaultLocale` configuration and applies `trailingSlash` rule.
  *
- * Any search params and hash fragments are preserved.
+ * Any search params and hash fragments are preserved if they are appended to the input pathname.
  *
  * @throws {TypeError} in non-production if target locale is not supported.
  */
