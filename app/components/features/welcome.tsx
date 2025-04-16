@@ -1,8 +1,10 @@
+import type React from 'react'
 import { Link } from 'react-router'
-import logoDark from './logo-dark.svg'
-import logoLight from './logo-light.svg'
 
-export function Welcome() {
+import logoDark from '@/components/assets/logo-dark.svg'
+import logoLight from '@/components/assets/logo-light.svg'
+
+export function Welcome(): React.JSX.Element {
   return (
     <section className="flex flex-col items-center justify-center gap-8 pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
