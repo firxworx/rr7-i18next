@@ -1,10 +1,11 @@
 import { isRouteErrorResponse, Outlet, useRouteError, redirect } from 'react-router'
-import type { Route } from './+types/locale.index'
-
-import { ALTERNATE_LOCALES, DEFAULT_LOCALE, PREFIX_DEFAULT_LOCALE, REDIRECT_DEFAULT_LOCALE } from '@/constants'
-import { isSupportedLocale, stripLocalePrefixFromPathname } from '@/lib/i18n'
-import { NotFoundScreen } from '@/components/layout/error.screens'
 import { useTranslation } from 'react-i18next'
+
+import type { Route } from './+types/[locale].index.route'
+
+import { DEFAULT_LOCALE, PREFIX_DEFAULT_LOCALE, REDIRECT_DEFAULT_LOCALE } from '@/constants'
+import { isAlternateSupportedLocale, isSupportedLocale, stripLocalePrefixFromPathname } from '@/lib/i18n'
+import { NotFoundScreen } from '@/components/layout/error.screens'
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   // allow request to proceed if there is no locale path prefix (assume default locale)
@@ -13,23 +14,22 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   }
 
   if (PREFIX_DEFAULT_LOCALE && isSupportedLocale(params.locale)) {
-    console.warn('locale loader debug warn: SHOULD NOT BE HERE!')
-    console.warn('locale loader debug warn: SHOULD NOT BE HERE!')
-    return null
+    throw new Error('Smokecheck fail: locale loader debug warn: SHOULD NOT BE HERE!')
   }
 
   if (!PREFIX_DEFAULT_LOCALE) {
+    // redirect to prefix-free URL if request has path prefix with default locale
     if (REDIRECT_DEFAULT_LOCALE && params.locale === DEFAULT_LOCALE) {
       return redirect(stripLocalePrefixFromPathname(new URL(request.url).pathname))
     }
 
-    if (([...ALTERNATE_LOCALES] as string[]).includes(params.locale)) {
-      // console.log(`locale loader allowing locale to proceed ${params.locale} for ${request.url}`)
+    // allow request to proceed if the non-default locale is supported
+    if (isAlternateSupportedLocale(params.locale)) {
       return null
     }
   }
 
-  console.warn(`rejecting request with locale param ${params.locale} -- ${request.url}`)
+  // console.warn(`rejecting request with locale param ${params.locale} -- ${request.url}`)
   throw new Response(null, { status: 404 })
 }
 

@@ -1,4 +1,5 @@
 import { data } from 'react-router'
+
 import { NotFoundScreen } from '@/components/layout/error.screens'
 
 export async function loader() {
