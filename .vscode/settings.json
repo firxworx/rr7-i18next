@@ -58,6 +58,7 @@
   // ensure these align with tailwind configuration for intellisense to compute correct values
   "tailwindCSS.rootFontSize": 16,
   "tailwindCSS.codeActions": true,
+  "tailwindCSS.classFunctions": ["clsx", "cva", "cn"],
 
   // exclude generated files and tmp/* from search
   "files.exclude": {
