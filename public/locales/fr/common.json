@@ -16,6 +16,24 @@
     "en": "English",
     "fr": "Français"
   },
+  "meta": {
+    "title": "RR7 i18next",
+    "description": "Exemple d'application SSR (remix) avec react-router démontrant l'intégration d'i18next"
+  },
+  "page": {
+    "home": {
+      "title": "Accueil",
+      "description": "Page d'accueil de l'application de démonstration."
+    },
+    "about": {
+      "title": "À propos",
+      "description": "À propos de l'application de démonstration."
+    },
+    "example": {
+      "title": "Exemple",
+      "description": "Page exemple de l'application de démonstration."
+    }
+  },
   "action": {
     "cancel": "Annuler",
     "close": "Fermer",
@@ -29,6 +47,7 @@
   },
   "nav": {
     "home": "Accueil",
+    "example": "Exemple",
     "about": "À propos"
   },
   "error": {
