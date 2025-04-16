@@ -1,8 +1,9 @@
 import { createMiddleware } from 'hono/factory'
 
-import { getLocaleFromPathname } from '@/lib/i18n'
+import { isSupportedLocale } from '@/lib/i18n'
 import type { ApiContext } from '@/server/types'
 import { initI18nextInstance } from '@/i18n/i18next.server'
+import { invariant } from '@/lib/invariant'
 
 /**
  * Be sure to run any middleware that enforces trailing slash URL rules before this one.
@@ -16,11 +17,12 @@ import { initI18nextInstance } from '@/i18n/i18next.server'
  * @see https://hono.dev/docs/middleware/builtin/language hono now supports built-in language middleware
  */
 export const i18nMiddleware = createMiddleware<ApiContext>(async (c, next) => {
-  const locale = getLocaleFromPathname(c.req.path) // sergio uses c.req.raw to work on raw Request object
-  const i18next = await initI18nextInstance(c.req.raw)
+  const i18n = await initI18nextInstance(c.req.raw)
 
-  c.set('locale', locale)
-  c.set('i18next', i18next)
+  invariant(isSupportedLocale(i18n.language), 'i18next language is not a supported locale')
+
+  c.set('locale', i18n.language)
+  c.set('i18next', i18n)
 
   return next()
 })
