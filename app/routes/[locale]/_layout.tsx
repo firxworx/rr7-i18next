@@ -5,8 +5,6 @@ import { LayoutHeader } from '@/components/layout/header.layout'
 import { LayoutFooter } from '@/components/layout/footer.layout'
 import { NAV_LINKS } from '@/constants'
 
-// import type { Route } from './+types/_layout'
-
 /**
  * Common layout shared by all routes under the `/:locale?` path.
  */

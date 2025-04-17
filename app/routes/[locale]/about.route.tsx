@@ -5,8 +5,6 @@ import { I18nDebug } from '@/components/i18n/i18n-debug'
 import { PageLayout } from '@/components/layout/page.layout'
 import { HomeI18nLink } from '@/components/ui/links'
 
-// import type { Route } from './+types/about.route'
-
 export default function AboutRoute(): React.JSX.Element {
   const { t } = useTranslation('common')
 
