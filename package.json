@@ -2,12 +2,18 @@
   "name": "rr7-i18next",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.8.1",
   "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
-    "start": "react-router-serve ./build/server/index.js",
+    "build": "vite build",
+    "dev": "vite dev",
+    "preview": "vite preview",
+    "node:build": "react-router build",
+    "node:dev": "react-router dev",
+    "node:start": "react-router-serve ./build/server/index.js",
+    "typegen": "wrangler types && react-router typegen",
     "typecheck": "react-router typegen && pnpm tsc --project tsconfig.json",
     "reset": "pnpm dlx rimraf --glob ./**/node_modules && pnpm dlx rimraf --glob ./**/dist",
+    "postinstall": "pnpm run typegen",
     "lint": "biome check .",
     "lint:fix": "biome check --write ."
   },
@@ -19,8 +25,6 @@
     "hono": "^4.7.7",
     "i18next": "^24.2.3",
     "i18next-browser-languagedetector": "^8.0.4",
-    "i18next-fetch-backend": "^6.0.0",
-    "i18next-fs-backend": "^2.6.0",
     "i18next-http-backend": "^3.0.2",
     "isbot": "^5.1.26",
     "pnpm": "^10.8.1",
@@ -28,12 +32,12 @@
     "react-dom": "^19.1.0",
     "react-i18next": "^15.4.1",
     "react-router": "^7.5.0",
-    "react-router-hono-server": "^2.13.0",
     "tailwind-merge": "^3.2.0",
     "ufo": "^1.6.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@cloudflare/vite-plugin": "^1.0.8",
     "@react-router/dev": "^7.5.0",
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "^22.14.1",
@@ -43,12 +47,15 @@
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.12.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
-      "esbuild"
+      "esbuild",
+      "sharp",
+      "workerd"
     ]
   }
 }
