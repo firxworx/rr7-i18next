@@ -37,8 +37,6 @@ export function LocaleSwitcher({ className }: LocaleSwitcherProps): React.JSX.El
   const isReady = i18n.isInitialized && isI18nReady
   const isRevalidating = revalidator.state !== 'idle'
 
-  console.log('pathname: ', pathname)
-
   // handle case where i18next and root loader locale are out of sync (force revalidation)
   useEffect(() => {
     if (i18n.language !== rootLoaderServerLocale) {
