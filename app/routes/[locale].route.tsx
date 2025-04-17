@@ -1,7 +1,7 @@
 import { isRouteErrorResponse, Outlet, useRouteError, redirect } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
-import type { Route } from './+types/[locale].index.route'
+import type { Route } from './+types/[locale].route'
 
 import { DEFAULT_LOCALE, PREFIX_DEFAULT_LOCALE, REDIRECT_DEFAULT_LOCALE } from '@/constants'
 import { isAlternateSupportedLocale, isSupportedLocale, stripLocalePrefixFromPathname } from '@/lib/i18n'

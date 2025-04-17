@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router'
 
-// import type { Route } from './+types/_layout'
-
 import { cn } from '@/lib/style'
 import { LayoutHeader } from '@/components/layout/header.layout'
 import { LayoutFooter } from '@/components/layout/footer.layout'
 import { NAV_LINKS } from '@/constants'
 
+// import type { Route } from './+types/_layout'
+
 /**
- * Layout that adds a `main` element with conditional classNames for root, non-root, and app paths.
+ * Common layout shared by all routes under the `/:locale?` path.
  */
 export default function Layout(): React.JSX.Element {
   return (
