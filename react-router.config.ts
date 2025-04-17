@@ -6,6 +6,7 @@ export default {
   buildDirectory: 'build',
   prerender: [],
   future: {
+    unstable_middleware: false,
     unstable_optimizeDeps: true,
     unstable_viteEnvironmentApi: true,
     unstable_splitRouteModules: true,
