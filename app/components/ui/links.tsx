@@ -18,7 +18,7 @@ const linkVariants: Map<AppLinkVariant, string> = new Map([
   [
     'link',
     clsx(
-      'text-blue-500 dark:text-white no-underline hover:underline underline-offset-4',
+      'text-blue-500 dark:text-blue-400 no-underline hover:underline underline-offset-4',
       'transition-all duration-300 ease-in-out',
     ),
   ],
