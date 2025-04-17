@@ -24,7 +24,7 @@ export default await createHonoServer<ApiContext>({
   },
 
   // /**
-  //  * Middleware to run after any other middleware potentially injected by `react-router-hono-server`.
+  //  * Middleware to run after any middleware potentially injected by `react-router-hono-server`.
   //  */
   // configure(app) {
   //   app.use(...)

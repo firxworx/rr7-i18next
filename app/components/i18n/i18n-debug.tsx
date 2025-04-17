@@ -5,7 +5,7 @@ import { useLocale } from '@/i18n/i18n.hooks'
 import { cn } from '@/lib/style'
 import { Box } from '@/components/ui/box'
 
-export function DebugI18n({ className }: { className?: string }): React.JSX.Element {
+export function I18nDebug({ className }: { className?: string }): React.JSX.Element {
   const { i18n } = useTranslation()
   const rootLoaderLocale = useLocale()
 

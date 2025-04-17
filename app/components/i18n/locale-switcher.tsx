@@ -1,5 +1,5 @@
 import type React from 'react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate, useRevalidator } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
@@ -14,10 +14,13 @@ interface LocaleSwitcherProps {
 }
 
 const defaultSelectClassName = clsx(
-  'block w-full p-2.5 text-base border rounded-lg',
-  'bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white',
-  'placeholder-gray-500 dark:placeholder-gray-400',
-  'focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500',
+  'block w-full py-2 px-2 text-sm leading-0 border outline-none rounded-lg',
+  'bg-neutral-200 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600',
+  'text-neutral-900 dark:text-white',
+  'placeholder-neutral-500 dark:placeholder-neutral-400',
+  'focus-visible:ring-2 focus-visible:ring-offset-0',
+  'focus-visible:ring-sky-500/50 focus-visible:border-sky-500/50',
+  'dark:focus-visible:ring-sky-500/50 dark:focus-visible:border-sky-500/50',
   'disabled:opacity-50',
 )
 
@@ -51,6 +54,12 @@ export function LocaleSwitcher({ className }: LocaleSwitcherProps): React.JSX.El
     }
   }, [i18n.language, currentLocale])
 
+  const languageNames = useMemo(() => {
+    return new Intl.DisplayNames(SUPPORTED_LOCALES, {
+      type: 'language',
+    })
+  }, [])
+
   const handleLocaleChange: React.ChangeEventHandler<HTMLSelectElement> = useCallback(
     async (event) => {
       if (!isReady) {
@@ -81,13 +90,13 @@ export function LocaleSwitcher({ className }: LocaleSwitcherProps): React.JSX.El
   return (
     <select
       value={currentLocale}
-      className={cn(defaultSelectClassName, 'max-w-[4rem]', className)}
+      className={cn(defaultSelectClassName, 'min-w-fit w-20', className)}
       disabled={!isReady || isRevalidating}
       onChange={handleLocaleChange}
     >
       {SUPPORTED_LOCALES.map((locale) => (
         <option key={locale} value={locale}>
-          {locale}
+          {languageNames.of(locale) ?? locale}
         </option>
       ))}
     </select>

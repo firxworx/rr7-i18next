@@ -5,11 +5,38 @@
     "Noto Color Emoji";
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+@layer base {
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+  html,
+  body {
+    @apply bg-white dark:bg-gray-950;
+
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+    }
+  }
+
+  :target {
+    scroll-margin-block-start: 2rem;
+  }
+
+  :focus {
+    scroll-margin-block-end: 8vh;
+  }
+
+  /*
+   * unset chrome/webkit autofill styles
+   */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--input-box-shadow-color, var(--color-background)) inset !important;
+    -webkit-text-fill-color: var(--color-foreground);
   }
 }

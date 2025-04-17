@@ -219,7 +219,7 @@ export function findLocalePathPrefix(pathname: string): string | undefined {
  *
  * @throws {TypeError} in non-production if target locale not supported (via `getLocalizedPathname()`)
  */
-export function getLocalizedRouterTo(targetLocale: string | undefined, to: To): To {
+export function getLocalizedRouterTo(targetLocale: SupportedLocale | undefined, to: To): To {
   if (typeof to === 'string') {
     return getLocalizedPathname(targetLocale, to)
   }

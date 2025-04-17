@@ -8,13 +8,21 @@ import { invariant } from '@/lib/invariant'
 /**
  * Be sure to run any middleware that enforces trailing slash URL rules before this one.
  *
- * Reminder:
+ * Reminders about react-router (remix):
  *
- * - rr7/remix reserves `_*` paths for internal functionality
- * - `*.data` suffixes are reserved for loaders
+ * - `_*` paths are reserved for internal functionality
+ * - `*.data` suffixes are reserved for route loaders
  *
- * @consider adding support for ACCEPT header especially for API/data routes.
- * @see https://hono.dev/docs/middleware/builtin/language hono now supports built-in language middleware
+ * Logic for determining the locale is delegated to the `initI18nextInstance()` function and
+ * is currently based on the request URL pathname prefix.
+ *
+ * In future consider a more elaborate locale detection strategy that may also involve cookies
+ * or request headers such as the `Accept-Language` header.
+ *
+ * Additional strategies can help improve UX and feedback especially with respect to API
+ * or data/resource routes that do not export a default component.
+ *
+ * @see https://hono.dev/docs/middleware/builtin/language note hono has now added built-in language middleware
  */
 export const i18nMiddleware = createMiddleware<ApiContext>(async (c, next) => {
   const i18n = await initI18nextInstance(c.req.raw)
