@@ -1,10 +1,22 @@
-.DS_Store
+# dependencies
 /node_modules/
 
-# React Router
+# react-router
 /.react-router/
 /build/
+/dist/
 
 # workflow
 NOTES.md
+*.NOTES.md
 *.wip.*
+
+# wrangler (cloudflare)
+/.wrangler/
+.dev.vars
+
+# typescript
+*.tsbuildinfo
+
+# os
+.DS_Store
