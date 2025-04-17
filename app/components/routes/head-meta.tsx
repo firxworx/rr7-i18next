@@ -1,5 +1,5 @@
-import { APP_BRAND_NAME } from '@/constants'
 import { useTranslation } from 'react-i18next'
+import { APP_BRAND_NAME } from '@/constants'
 
 interface HeadMetaProps {
   title?: string
@@ -30,11 +30,11 @@ export function HeadMeta({ title, description }: HeadMetaProps): React.JSX.Eleme
   return (
     <>
       {title ? (
-        <title>{`${title} | ${APP_BRAND_NAME} | ${t('meta.title')}`}</title>
+        <title>{`${title} | ${APP_BRAND_NAME} | ${t('title')}`}</title>
       ) : (
-        <title>{`${APP_BRAND_NAME} | ${t('meta.title')}`}</title>
+        <title>{`${APP_BRAND_NAME} | ${t('title')}`}</title>
       )}
-      <meta name="description" content={description || t('meta.description')} />
+      <meta name="description" content={description || t('description')} />
     </>
   )
 }
