@@ -6,7 +6,7 @@
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc",
+    "typecheck": "react-router typegen && pnpm tsc --project tsconfig.json",
     "reset": "pnpm dlx rimraf --glob ./**/node_modules && pnpm dlx rimraf --glob ./**/dist",
     "lint": "biome check .",
     "lint:fix": "biome check --write ."
