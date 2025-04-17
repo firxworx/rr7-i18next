@@ -1,21 +1,22 @@
 import type React from 'react'
 import { useEffect } from 'react'
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from 'react-router'
-import { useSSR, useTranslation } from 'react-i18next'
-
-import './app.css'
+import { useSSR as useI18nextSSR, useTranslation } from 'react-i18next'
 
 import type { Route } from './+types/root'
+import './app.css'
+
 import type { NestedDictionary } from '@/types/record.types'
+import { I18NEXT_DEFAULT_NAMESPACE } from '@/constants'
 
 const createI18nextStore = (locale: string, ns: string, resources: NestedDictionary) => {
   return { [locale]: { [ns]: resources } }
 }
 
 export async function loader({ context: { i18next, locale } }: Route.LoaderArgs) {
-  // i18n namespace resource bundle is a dictionary object that mirrors ts/json namespace source data
-  const initialResources = i18next.getResourceBundle(locale, 'common')
-  const initialI18nStore = createI18nextStore(locale, 'common', initialResources)
+  // the i18n namespace resource bundle is an object with shape matching the ts/json namespace source data
+  const initialResources = i18next.getResourceBundle(locale, I18NEXT_DEFAULT_NAMESPACE)
+  const initialI18nStore = createI18nextStore(locale, I18NEXT_DEFAULT_NAMESPACE, initialResources)
 
   return { locale, initialI18nStore }
 }
@@ -26,9 +27,6 @@ export async function loader({ context: { i18next, locale } }: Route.LoaderArgs)
 export function Layout({ children }: { children: React.ReactNode }): React.JSX.Element {
   const data = useLoaderData<typeof loader>()
   const { i18n } = useTranslation()
-
-  // note: due to an upstream issue this can cause a hydration client/server mismatch error with rr7 on first load
-  useSSR(data.initialI18nStore, data.locale)
 
   return (
     <html lang={data.locale} dir={i18n.dir(data.locale)}>
@@ -47,11 +45,14 @@ export function Layout({ children }: { children: React.ReactNode }): React.JSX.E
   )
 }
 
-export default function App({ loaderData: { locale } }: Route.ComponentProps): React.JSX.Element {
+export default function App({ loaderData: { locale, initialI18nStore } }: Route.ComponentProps): React.JSX.Element {
   const { i18n } = useTranslation()
 
+  // preload i18next resources so that the client i18next instance is immediately in ready state
+  useI18nextSSR(initialI18nStore, locale)
+
   // handle case where server locale differs from the client i18n state as a result of client-side navigation
-  // this functionality is similar to `useChangeLanguage()` hook exported by remix-i18next
+  // the following effect is similar to `useChangeLanguage()` hook from @sergiodxa's `remix-i18next`
   useEffect(() => {
     if (i18n.language !== locale) {
       i18n.changeLanguage(locale)
