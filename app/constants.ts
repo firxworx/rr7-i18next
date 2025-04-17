@@ -1,4 +1,4 @@
-import type { I18nextResource } from '@/i18n/resource'
+import type { I18nextResource } from '@/i18n/i18next.resources'
 
 export type DefaultLocale = typeof DEFAULT_LOCALE
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
@@ -20,8 +20,8 @@ export const ALTERNATE_LOCALES = SUPPORTED_LOCALES.filter((locale) => locale !==
 export const PREFIX_DEFAULT_LOCALE: boolean = false
 export const REDIRECT_DEFAULT_LOCALE: boolean = true
 
-export const I18NEXT_DEFAULT_NAMESPACE = 'common'
-export const I18NEXT_NAMESPACES = ['common']
+export const I18NEXT_DEFAULT_NAMESPACE = 'common' as const
+export const I18NEXT_NAMESPACES = ['common'] as const
 
 export const REQUIRE_TRAILING_SLASH = false
 
