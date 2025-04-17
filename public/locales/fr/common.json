@@ -24,6 +24,7 @@
     "home": {
       "title": "Accueil",
       "description": "Page d'accueil de l'application de démonstration.",
+      "navBlurb": "Les liens de navigation suivants sont localisés selon la localité actuelle :",
       "demoBlurb": "Utilisez ce qui suit pour démontrer comment naviguer vers une page avec un préfixe de localité différent changera la localité :"
     },
     "about": {
