@@ -7,6 +7,17 @@
 
 @layer base {
 
+  html {
+    @apply scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: thin;
+
+    .disable-transitions,
+    .disable-transitions * {
+      @apply !transition-none;
+    }
+  }
+
   html,
   body {
     @apply bg-white dark:bg-gray-950;
@@ -14,6 +25,11 @@
     @media (prefers-color-scheme: dark) {
       color-scheme: dark;
     }
+  }
+
+  body {
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
   }
 
   :target {
