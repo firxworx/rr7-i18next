@@ -23,7 +23,7 @@ export function LayoutHeader({ navLinks }: LayoutHeaderProps): React.JSX.Element
   const locale = ensureLocale(i18n.language)
 
   return (
-    <header className="border-b border-b-slate-100/25">
+    <header className="bg-neutral-100 dark:bg-neutral-100/5">
       <nav className="container mx-auto flex items-center justify-between p-4">
         <ul className="flex gap-2">
           <li>
