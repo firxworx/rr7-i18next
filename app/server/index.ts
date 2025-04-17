@@ -1,3 +1,7 @@
+import { Hono } from 'hono'
+import { prettyJSON } from 'hono/pretty-json'
+import { contextStorage } from 'hono/context-storage'
+
 import { createHonoServer } from 'react-router-hono-server/node'
 
 import type { ApiContext, Variables } from '@/server/types'
@@ -10,25 +14,16 @@ declare module 'react-router' {
   interface AppLoadContext extends Variables {}
 }
 
+const app = new Hono<ApiContext>().use(contextStorage()).use('*', prettyJSON()).use(i18nMiddleware)
+
 /**
  * @see https://sergiodxa.com/tutorials/customize-remix-app-load-context-type
  */
 export default await createHonoServer<ApiContext>({
   /**
-   * Middleware to run before any other middleware.
-   *
-   * Add any auth middlware first, then i18n middleware.
+   * Custom hono instance.
    */
-  beforeAll(app) {
-    app.use(i18nMiddleware)
-  },
-
-  // /**
-  //  * Middleware to run after any middleware potentially injected by `react-router-hono-server`.
-  //  */
-  // configure(app) {
-  //   app.use(...)
-  // },
+  app,
 
   /**
    * Callback to populate react-router v7+ (remix) context.
