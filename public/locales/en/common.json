@@ -23,7 +23,8 @@
   "page": {
     "home": {
       "title": "Home",
-      "description": "Home page of the demo app."
+      "description": "Home page of the demo app.",
+      "demoBlurb": "Use the following to demonstrate how navigating to a page with a different locale prefix will change the locale:"
     },
     "about": {
       "title": "About",

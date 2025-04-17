@@ -23,7 +23,8 @@
   "page": {
     "home": {
       "title": "Accueil",
-      "description": "Page d'accueil de l'application de démonstration."
+      "description": "Page d'accueil de l'application de démonstration.",
+      "demoBlurb": "Utilisez ce qui suit pour démontrer comment naviguer vers une page avec un préfixe de localité différent changera la localité :"
     },
     "about": {
       "title": "À propos",
