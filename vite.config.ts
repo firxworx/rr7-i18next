@@ -31,9 +31,9 @@ export default defineConfig({
     reactRouter(),
     tsconfigPaths(),
   ],
-  // resolution for issue similar to https://github.com/vitejs/vite/issues/6985
+  // note: if you use i18next-fs-backend add it to the optimizeDeps.include array to resolve build issues
+  // for a resolution similar to issue https://github.com/vitejs/vite/issues/6985
   optimizeDeps: {
-    include: ['i18next-fs-backend'],
     exclude: ['@opentelemetry/*'],
     esbuildOptions: {
       supported: {
