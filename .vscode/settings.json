@@ -63,8 +63,8 @@
   // exclude generated files and tmp/* from search
   "files.exclude": {
     "**/routeTree.gen.ts": true,
-    "pnpm-lock.yaml": true,
-    "**/node_modules/*": true,
+    "pnpm-lock.yaml": false,
+    "**/node_modules/*": false,
     "tmp/*": true
   }
 }
