@@ -6,17 +6,11 @@ import { useSSR as useI18nextSSR, useTranslation } from 'react-i18next'
 import type { Route } from './+types/root'
 import './app.css'
 
-import type { NestedDictionary } from '@/types/record.types'
 import { I18NEXT_DEFAULT_NAMESPACE } from '@/constants'
-
-const createI18nextStore = (locale: string, ns: string, resources: NestedDictionary) => {
-  return { [locale]: { [ns]: resources } }
-}
+import { createI18nextStore } from '@/i18n/i18next.lib'
 
 export async function loader({ context: { i18next, locale } }: Route.LoaderArgs) {
-  // the i18n namespace resource bundle is an object with shape matching the ts/json namespace source data
-  const initialResources = i18next.getResourceBundle(locale, I18NEXT_DEFAULT_NAMESPACE)
-  const initialI18nStore = createI18nextStore(locale, I18NEXT_DEFAULT_NAMESPACE, initialResources)
+  const initialI18nStore = createI18nextStore(i18next, locale, [I18NEXT_DEFAULT_NAMESPACE])
 
   return { locale, initialI18nStore }
 }

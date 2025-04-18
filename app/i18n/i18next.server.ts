@@ -36,12 +36,3 @@ export const initI18nextInstance = async (request: Request, _routerContext?: Ent
 
   return instance
 }
-
-// /**
-//  * Helper for server-side code including actions and loaders to get a fixed translation function
-//  * for the locale determined from the request and the specified namespace(s).
-//  */
-// export const getI18nextInstanceFixedT = async (request: Request, ns: string | string[] = 'common') => {
-//   const instance = await initI18nextInstance(request)
-//   return instance.getFixedT(getLocaleFromUrl(request.url), ns)
-// }
